@@ -1,0 +1,144 @@
+PLAN PARA CREAR LA PÁGINA DE FÚTBOL
+Paso 1: Planificación de la estructura
+
+Antes de tocar código, define la estructura de tu sitio:
+
+Página principal (index.html):
+
+Encabezado (logo, menú de navegación)
+
+Sección de noticias o partidos en vivo
+
+Sección de equipos o estadísticas
+
+Enlace a la tienda de camisetas
+
+Página de tienda (tienda.html):
+
+Listado de camisetas
+
+Precio, descripción, imagen
+
+Botón para comprar o añadir al carrito
+
+Lectura recomendada:
+
+HTML básico: https://developer.mozilla.org/es/docs/Web/HTML
+
+Estructura de páginas web: HTML Semántico
+
+Paso 2: Crear archivos y carpetas
+
+Carpeta principal: futbol-web/
+
+Dentro, crea:
+
+index.html → página principal
+
+tienda.html → tienda de camisetas
+
+css/estilos.css → estilos generales
+
+js/app.js → lógica JavaScript
+
+Lectura recomendada:
+
+Cómo organizar archivos web: https://developer.mozilla.org/es/docs/Learn/Getting_started_with_the_web/Dealing_with_files
+
+Paso 3: Crear el HTML básico de la página principal
+
+Qué aprender antes:
+
+Estructura básica de HTML (<html>, <head>, <body>)
+
+Etiquetas como <header>, <nav>, <section>, <footer>
+
+Links internos (<a href="tienda.html">Tienda</a>)
+
+Lectura recomendada:
+
+HTML básico
+
+Etiquetas semánticas
+
+Paso 4: Agregar estilos con CSS
+
+Qué aprender antes:
+
+Selectores básicos (div, .clase, #id)
+
+Propiedades de texto y fondo (color, background-color, font-family)
+
+Flexbox para diseño (display: flex; justify-content; align-items)
+
+Responsive design (@media queries)
+
+Lectura recomendada:
+
+CSS básico: https://developer.mozilla.org/es/docs/Web/CSS
+
+Flexbox: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+Paso 5: Consumir la API de fútbol con JavaScript
+
+Qué aprender antes:
+
+fetch() para hacer peticiones HTTP
+
+async/await para manejar datos asíncronos
+
+Manipulación del DOM (document.getElementById, appendChild)
+
+Manejo de JSON (response.json())
+
+Lectura recomendada:
+
+Fetch API
+
+Manipulación DOM
+
+Paso 6: Crear la tienda de camisetas
+
+Qué aprender antes:
+
+Listados de productos (<ul>, <li>, <div>)
+
+Imágenes (<img>)
+
+Formularios para comprar (<form>, <input>, <button>)
+
+Links internos entre páginas (<a>)
+
+Lectura recomendada:
+
+Formularios HTML
+
+Imágenes y medios
+
+Paso 7: Conectar todo y probar
+
+Verifica que:
+
+El menú de navegación funcione
+
+La API cargue correctamente los datos de fútbol
+
+La tienda se vea y los links funcionen
+
+Abre en el navegador: index.html
+
+Usa la consola de desarrollador (F12) para depurar errores
+
+Lectura recomendada:
+
+Depuración con Chrome DevTools: https://developer.chrome.com/docs/devtools/
+
+Si quieres, puedo hacerte un ejemplo completo con código listo para copiar y pegar, que tenga:
+
+Página principal con datos de partidos de fútbol desde una API gratuita sin registro
+
+Botón que lleva a la página de tienda
+
+Página de tienda con camisetas con imágenes y precios
+
+¿Quieres que haga eso ahora?
