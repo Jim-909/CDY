@@ -1,0 +1,20 @@
+{
+  "2025": {
+    "colombia": {
+      "local": [
+        {"id": 4, "nombre": "Camisa Colombia", "precio": 30.00, "talla": "l", "colores": ["amarillo"], "stock": "6"}
+      ],
+      "visitante": [
+        {"id": 8, "nombre": "Camisa Colombia", "precio": 30.00, "talla": "s", "colores": ["amarillo", "rojo", "blanco"], "stock": "3"}
+      ]
+    },
+    "espana": {
+      "local": [
+        {"id": 74, "nombre": "Camisa España", "precio": 30.00, "talla": "l", "colores": ["amarillo"], "stock": "6"}
+      ],
+      "visitante": [
+        {"id": 38, "nombre": "Camisa España", "precio": 30.00, "talla": "s", "colores": ["amarillo", "rojo", "blanco"], "stock": "3"}
+      ]
+    }
+  }
+}
