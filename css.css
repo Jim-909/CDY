@@ -4,7 +4,7 @@
     margin: 0px;
 }
 :root {
-  /* Colores */
+  /* ------------------------Colores------------------------- */
   --color-principal: #3498db;
   --color-secundario: #2c3e50;
   --color-texto: #333;
@@ -13,20 +13,20 @@
   --color-sombra: rgba(0, 0, 0, 0.1);
   --color-total: #e74c3c;
 
-  /* Tipografía */
+  /* ---------------------------Tipografía------------------------------ */
   --fuente-principal: sans-serif;
   --fuente-titulos: "Arial Black", sans-serif;
   --tamano-fuente-base: 16px;
   --tamano-fuente-grande: 1.5rem;
   --tamano-fuente-pequena: 0.9rem;
 
-  /* Espaciado */
+  /* ------------------------------Espaciado---------------------------- */
   --espaciado-medio: 1rem;
   --espaciado-grande: 2rem;
   --margen-producto: 20px;
 }
 
-/* Estilos generales */
+/* ----------------------------Estilos generales----------------------- */
 body {
   font-family: var(--fuente-principal);
   font-size: var(--tamano-fuente-base);
@@ -36,14 +36,14 @@ body {
   padding: var(--espaciado-grande);
 }
 
-/* Encabezado y Navegación */
+/* ---------------------Encabezado y Navegación---------------------------- */
 header {
   background-color: var(--color-secundario);
   color: #fff;
   padding: var(--espaciado-medio) 0;
   text-align: center;
 }
-
+/* -----------------enlaces de la barra de navegacion------------------------------------- */
 header nav a {
   color: #fff;
   text-decoration: none;
@@ -51,12 +51,12 @@ header nav a {
   padding: 0 var(--espaciado-medio);
   transition: color 0.3s ease;
 }
-
+/* ---------------------estilo de seleccionado de los enlaces del navegador---------------------------------------- */
 header nav a:hover {
   color: var(--color-principal);
 }
 
-/* Contenedor de productos */
+/* -------------------------------Contenedor de productos-------------------- */
 .camisas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -64,7 +64,7 @@ header nav a:hover {
   padding: var(--espaciado-grande) 0;
 }
 
-/* Tarjeta de producto individual */
+/* -------------------Tarjeta de producto individual------------------------ */
 .producto {
   background-color: #fff;
   border-radius: 8px;
@@ -73,33 +73,33 @@ header nav a:hover {
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+/* ----------------------------estilo de selecionado del producto----------------------------------------------------- */
 .producto:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px var(--color-sombra);
 }
-
+/* ----------------titulo de los productos--------------------------------- */
 .producto h3 {
   font-family: var(--fuente-titulos);
   font-size: var(--tamano-fuente-grande);
   color: var(--color-principal);
   margin-bottom: var(--espaciado-medio);
 }
-
+/* ------------------imagen de los productos----------------------------------- */
 .producto img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
 }
-
+/* -----------------informacion de los productos----------------------------- */
 .producto p {
   margin: 0.5rem 0;
 }
-
+/* ---------------------ayuda de la compra --------------------------------------------- */
 .producto label {
   font-weight: bold;
 }
-
+/* ----------------------cantidad de los productos -------------------------------- */
 .producto .cantidad {
   width: 60px;
   padding: 5px;
@@ -108,7 +108,7 @@ header nav a:hover {
   border-radius: 4px;
 }
 
-/* Resumen del carrito */
+/*------------------------------- Resumen del carrito-------------------------------- */
 .resumen {
   background-color: var(--color-secundario);
   color: #fff;
@@ -117,12 +117,12 @@ header nav a:hover {
   text-align: right;
   margin-top: var(--espaciado-grande);
 }
-
+/* -----------------------parrafos de informacion del resumen----------------------------------- */
 .resumen p {
   font-size: var(--tamano-fuente-grande);
   font-weight: bold;
 }
-
+/* ----------------------total a pagar-------------------------------------------- */
 .resumen #total {
   color: var(--color-total);
   font-family: var(--fuente-titulos);

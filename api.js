@@ -44,27 +44,43 @@ fetch('productos.json')
   })
   .catch(error => console.error(error));
   /* -------------------------carrito ------------------------------ */
-  function calcularTotal() {
+function calcularTotal() {
     const productosEnCarrito = document.querySelectorAll('.producto');
     let total = 0;
+    let resumenHTML = ''; // Inicializamos una cadena vacía para el resumen
 
     productosEnCarrito.forEach(producto => {
         const cantidadElemento = producto.querySelector('.cantidad');
         const cantidad = parseInt(cantidadElemento.value);
         const precio = parseFloat(producto.getAttribute('data-precio'));
+        
+        // Obtenemos el nombre del producto del HTML
+        const nombreProducto = producto.querySelector('h3').textContent;
 
         if (cantidad > 0) {
-            total += cantidad * precio;
-            console.log(`cantidad ${total}`)
+            const subtotal = cantidad * precio;
+            total += subtotal;
+
+            // Construimos la cadena de HTML para cada producto en el resumen
+            resumenHTML += `
+                <div>
+                    <p>Producto: ${nombreProducto}, Cantidad: ${cantidad}, Precio unitario: $${precio.toFixed(2)}, Subtotal: €${subtotal.toFixed(2)}</p>
+                </div>
+            `;
         }
     });
 
     const totalElemento = document.getElementById('total');
     if (totalElemento) {
-        totalElemento.textContent = total.toFixed(2);
+        totalElemento.textContent = `€${total.toFixed(2)}`;
     }
-
     
+    // Corregimos la variable resumen
+    const resumenElemento = document.getElementById('resumen'); 
+    if (resumenElemento) {
+        resumenElemento.innerHTML = resumenHTML;
+    }
 }
+
 /* ----------------------leer api de futbol------------------------------------------------- */
 
