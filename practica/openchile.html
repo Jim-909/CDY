@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>EJERCICO 1</h2>
+    <script>
+        const lista = document.createElement("ul");
+        lista.innerHTML= `<li id="2">manzana</li> 
+        <li id="4">pepinos</li> 
+        <li id="5">verengena</li> 
+        <li id="6">fresa</li> 
+        <li id="34">sandia</li> 
+        `;
+        document.body.appendChild(lista);
+        
+    </script>
+    <h2>ejercico 2</h2>
+    <p id="contendor-producto"></p>
+    <script>
+        const produc = document.createElement("div")
+        produc.id ="canasta";
+        produc.innerHTML = `
+        <h3>manzana</h3>
+        <p>precio: 38745</p>
+        <button>agregar al carrito</button>`;
+        document.getElementById("contendor-producto").appendChild(produc)
+    </script>
+    
+</body>
+</html>

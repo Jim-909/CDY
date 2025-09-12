@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="ico/favicon.ico">
-  <link rel="stylesheet" href="css.css">
-  <title>Day-s-hop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day-s-hop</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="css.css">
 </head>
 <body>
-  <div>
-    <header>
-      <img src="ico/logo.png" alt="logo de la empresa">
-      <div>
-        <h1>Day-s-hop</h1>
-      </div>
-     <div>
-      <nav>
-        <a href="index.html" >tienda</a>
-        <a href="futbol.html" >futboll</a>
-        
-      </nav>
-      <div>
-
-      </div>
-      <p>buscador</p>
-      </div> 
-      
-    </header>
-    
-
+<header>
+  <div class="header-top">
+    <div class="logo">
+      <img src="ico/logo.png" alt="logo Day-s-hop">
+    </div>
+    <h1 class="titulo-degradado">Day-s-hop</h1>
+    <div class="header-buscador">
+      <label>
+        <span class="material-icons">search</span>
+        <input type="text" id="inpBuscador" placeholder="Buscar productos..." aria-label="Buscar productos">
+      </label>
+    </div>
   </div>
-  
+</header>
+
+<main>
   <div class="camisas"></div>
+</main>
 
-  <div class="ctn-resumen">
-    <p> Total: <span id="total">€0.00</span></p>
+<!-- Botón de carrito fijo con badge -->
+<button id="btnAbrirCarrito" class="btn-carrito">
+  <span class="material-icons">shopping_cart</span>
+  <span id="badgeCarrito">0</span>
+</button>
+
+<!-- MODAL CARRITO -->
+<div id="modalCarrito" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-contenido">
+    <span class="cerrar">&times;</span>
+    <h2>Carrito</h2>
+    <div id="lista-carrito"></div>
+    <p>Total: <span id="totalCarrito">€0.00</span></p>
   </div>
-  <div class="cnt-resumen">
-    <p id="resumen"></p>
+</div>
+
+<footer>
+  <div>
+    <p>© 2025: Jimmy</p>
   </div>
-   
-  <script src="api.js"></script>
-  <footer>
-    <div>
-      <p>© 2025:jimmy</p>
+  <div id="datosContactos">
+    <p>Teléfono: 612432808</p>
+    <p>Correo electrónico: dayshop@gmail.com</p>
+    <div id="informacion">
+      <a href="#">Políticas de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Políticas de cookies</a>
+      <a href="#">Aviso legal</a>
     </div>
-    <div id="datosContactos">
-      <a href="">politicas de privacidad</a>
-      <a href="">terminos y condiciones</a>
-      <a href="">politicas de cookies</a>
-      <a href="">aviso legal
+  </div>
+</footer>
 
-      </a>
-      <p>telefono de contacto: xxx-xxxxxx</p>
-
-    </div>
-  </footer>
+<script src="api.js" defer></script>
 </body>
 </html>

@@ -1,86 +1,118 @@
-fetch('productos.json')
-  .then(response => {
-    if (!response.ok) throw new Error("Error al cargar los productos");
-    return response.json();
-  })
-  .then(productos => {
-    const ctncamisas = document.querySelector('.camisas');
-    let camisastotales = ''; 
+const listaProductos = document.querySelector(".camisas");
+const inputBuscar = document.getElementById("inpBuscador");
+const modalCarrito = document.getElementById("modalCarrito");
+const btnAbrirCarrito = document.getElementById("btnAbrirCarrito");
+const spanCerrar = document.querySelector(".cerrar");
+const listaCarrito = document.getElementById("lista-carrito");
+const totalCarrito = document.getElementById("totalCarrito");
+const badgeCarrito = document.getElementById("badgeCarrito");
 
-    // Recorrer temporadas
-    for (const temporada in productos) {
-      const equipos = productos[temporada];
+let productosCargados = [];
 
-      // Recorrer equipos
-      for (const equipo in equipos) {
-        const equipaciones = equipos[equipo];
+// Abrir / cerrar modal
+btnAbrirCarrito.addEventListener("click", () => modalCarrito.style.display = "block");
+spanCerrar.addEventListener("click", () => modalCarrito.style.display = "none");
+window.addEventListener("click", e => { if(e.target===modalCarrito) modalCarrito.style.display="none"; });
 
-        // Recorrer tipos de equipación (local, visitante, entrenamiento, etc.)
-        for (const tipo in equipaciones) {
-          const camisas = equipaciones[tipo];
-
-          // Recorrer cada camisa
-          camisas.forEach(camisa => {
-            camisastotales += `
-              <div class="producto" data-id="${camisa.id}" data-precio="${camisa.precio}">
-                   
-                <h3>${camisa.nombre} (${equipo} - ${tipo})</h3>
-                <div>
-                    <img src="${camisa.imagen}" atl="${camisa.nombre}">
-                </div>
-                
-                <p>Precio: $${camisa.precio.toFixed(2)}</p>
-                <p>Temporada: ${temporada}</p>
-                <label>Cantidad: </label>
-                <input type="number" class="cantidad" min="0" value="0" onchange="calcularTotal()">
-              </div>
-            `;
-          });
+// Cargar productos
+fetch("productos.json")
+.then(res => res.json())
+.then(data => {
+    productosCargados = [];
+    for(const temporada in data){
+        for(const equipo in data[temporada]){
+            for(const tipo in data[temporada][equipo]){
+                data[temporada][equipo][tipo].forEach(p => {
+                    productosCargados.push({...p, equipo, tipo, temporada});
+                });
+            }
         }
-      }
     }
+    mostrarProductos(productosCargados);
+});
 
-    ctncamisas.innerHTML = camisastotales;
-  })
-  .catch(error => console.error(error));
-  /* -------------------------carrito ------------------------------ */
-function calcularTotal() {
-    const productosEnCarrito = document.querySelectorAll('.producto');
-    let total = 0;
-    let resumenHTML = ''; // Inicializamos una cadena vacía para el resumen
-
-    productosEnCarrito.forEach(producto => {
-        const cantidadElemento = producto.querySelector('.cantidad');
-        const cantidad = parseInt(cantidadElemento.value);
-        const precio = parseFloat(producto.getAttribute('data-precio'));
-        
-        // Obtenemos el nombre del producto del HTML
-        const nombreProducto = producto.querySelector('h3').textContent;
-
-        if (cantidad > 0) {
-            const subtotal = cantidad * precio;
-            total += subtotal;
-
-            // Construimos la cadena de HTML para cada producto en el resumen
-            resumenHTML += `
-                <div>
-                    <p>Producto: ${nombreProducto}, Cantidad: ${cantidad}, Precio unitario: $${precio.toFixed(2)}, Subtotal: €${subtotal.toFixed(2)}</p>
-                </div>
-            `;
-        }
+// Mostrar productos
+function mostrarProductos(productos){
+    listaProductos.innerHTML = "";
+    productos.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "producto";
+        div.innerHTML = `
+            <h3>${p.nombre} (${p.tipo})</h3>
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <p>Precio: €${p.precio.toFixed(2)}</p>
+            <button>Agregar al carrito</button>
+        `;
+        div.querySelector("button").addEventListener("click", ()=> agregarAlCarrito(p.tipo, p.precio));
+        listaProductos.appendChild(div);
     });
-
-    const totalElemento = document.getElementById('total');
-    if (totalElemento) {
-        totalElemento.textContent = `€${total.toFixed(2)}`;
-    }
-    
-    // Corregimos la variable resumen
-    const resumenElemento = document.getElementById('resumen'); 
-    if (resumenElemento) {
-        resumenElemento.innerHTML = resumenHTML;
-    }
 }
 
-/* ----------------------leer api de futbol------------------------------------------------- */
+// Carrito
+function agregarAlCarrito(tipo, precio){
+    const existente = Array.from(listaCarrito.children).find(p => p.dataset.tipo===tipo);
+    if(existente){
+        const input = existente.querySelector("input");
+        input.value = parseInt(input.value)+1;
+        actualizarTotal();
+        return;
+    }
+    const div = document.createElement("div");
+    div.className = "producto-carrito";
+    div.dataset.tipo = tipo;
+    div.innerHTML = `
+        <span>${tipo} - €${precio.toFixed(2)}</span>
+        <button class="btn-restar">-</button>
+        <input type="number" value="1" min="1">
+        <button class="btn-sumar">+</button>
+        <button class="btn-eliminar">Eliminar</button>
+    `;
+    // Botones
+    div.querySelector(".btn-sumar").addEventListener("click", ()=>{
+        const input = div.querySelector("input");
+        input.value = parseInt(input.value)+1;
+        actualizarTotal();
+    });
+    div.querySelector(".btn-restar").addEventListener("click", ()=>{
+        const input = div.querySelector("input");
+        if(input.value>1) input.value = parseInt(input.value)-1;
+        actualizarTotal();
+    });
+    div.querySelector(".btn-eliminar").addEventListener("click", ()=>{
+        div.remove();
+        actualizarTotal();
+    });
+    div.querySelector("input").addEventListener("input", ()=>{
+        const input = div.querySelector("input");
+        if(input.value<1) input.value=1;
+        actualizarTotal();
+    });
 
+    listaCarrito.appendChild(div);
+    actualizarTotal();
+}
+
+// Actualizar total y badge
+function actualizarTotal(){
+    let total = 0;
+    let cantidadTotal = 0;
+    Array.from(listaCarrito.children).forEach(div=>{
+        const precio = parseFloat(div.querySelector("span").textContent.split("€")[1]);
+        const cantidad = parseInt(div.querySelector("input").value);
+        total += precio*cantidad;
+        cantidadTotal += cantidad;
+    });
+    totalCarrito.textContent = `€${total.toFixed(2)}`;
+    badgeCarrito.textContent = cantidadTotal;
+}
+
+// Búsqueda
+inputBuscar.addEventListener("input", ()=>{
+    const term = inputBuscar.value.toLowerCase();
+    const filtrados = productosCargados.filter(p =>
+        p.nombre.toLowerCase().includes(term) ||
+        p.tipo.toLowerCase().includes(term) ||
+        p.equipo.toLowerCase().includes(term)
+    );
+    mostrarProductos(filtrados.length ? filtrados : []);
+});

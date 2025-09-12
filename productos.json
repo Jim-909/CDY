@@ -2,18 +2,76 @@
   "2025": {
     "colombia": {
       "local": [
-        {"id": 4,"nombre": "Camisa Colombia", "precio": 30.00, "talla": "l", "colores": ["amarillo"], "stock": "6", "marca": "Adidas", "imagen": "img/colombia_local.png"}
+        {
+          "id": 456,
+          "nombre": "Camisa Colombia", 
+          "precio": 102.75, 
+          "talla": "l", 
+          "colores": ["amarillo"], 
+          "stock": "6", 
+          "marca": "Adidas", 
+          "imagen": "img/colombia_local.png"}
       ],
       "visitante": [
-        {"id": 8, "nombre": "Camisa Colombia", "precio": 30.00, "talla": "s", "colores": ["amarillo", "rojo", "blanco"], "stock": "3" ,"marca": "Adidas", "imagen": "img/colombia_visitante.png"}
+        {
+          "id": 823, 
+          "nombre": "Camisa Colombia", 
+          "precio": 65.00, 
+          "talla": "s", 
+          "colores": ["amarillo", "rojo", "blanco"], 
+          "stock": "3",
+          "marca": "Adidas", 
+          "imagen": "img/colombia_visitante.png"}
       ]
     },
     "españa": {
       "local": [
-        {"id": 74, "nombre": "Camisa España", "precio": 30.00, "talla": "l", "colores": ["amarillo"], "stock": "6" ,"marca": "Adidas" , "imagen": "img/españa_local.png"}
+        {
+          "id": 742, 
+          "nombre": "Camisa España", 
+          "precio": 76.99, 
+          "talla": "l", 
+          "colores": ["amarillo"], 
+          "stock": "6",
+          "marca": "Adidas", 
+          "imagen": "img/españa_local.png"}
       ],
       "visitante": [
-        {"id": 38, "nombre": "Camisa España", "precio": 30.00, "talla": "s", "colores": ["amarillo", "rojo", "blanco"], "stock": "3" ,"marca": "Adidas" , "imagen": "img/españa_visitante.png"}
+        {
+          "id": 368, 
+          "nombre": "Camisa España", 
+          "precio": 107.99, 
+          "talla": "s", 
+          "colores": ["amarillo", "rojo", "blanco"], 
+          "stock": "3",
+          "marca": "Adidas", 
+          "imagen": "img/españa_visitante.png"}
+      ]
+    },
+    "venezuela": {
+      "local": [
+        {
+          "id": 749, 
+          "nombre": "Camisa Venezuela",
+          "precio": 46.75, 
+          "talla": "l", 
+          "colores": ["amarillo"], 
+          "stock": "6" ,
+          "marca": "Adidas", 
+          "imagen": ""
+          }
+      ],
+      "visitante": [
+        {
+          "id": 37568,
+          "nombre": "Camisa Venezuela", 
+          "precio": 59.99, 
+          "talla": "s", 
+          "colores": ["amarillo", "rojo", "blanco"], 
+          "stock": "3",
+          "marca": "Adidas", 
+          "imagen": ""
+        }
       ]
     }
   }
