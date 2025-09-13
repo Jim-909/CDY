@@ -11,6 +11,9 @@ header {
   background-color: #2c3e50;
   color: white;
   padding: 10px 20px;
+  position: sticky;
+  top: 0; /* muy importante, indica dónde se "pega" */
+  z-index: 1000; /* para que quede por encima de otros elementos */
 }
 .header-top {
   display: flex;
@@ -36,9 +39,9 @@ header {
 /* Botón carrito fijo con badge */
 .btn-carrito {
   position: fixed;
-  top: 20px;
+  bottom: 50px;
   right: 20px;
-  background-color: #e74c3c;
+  background: linear-gradient(90deg, rgb(0, 0, 0), red);
   border: none;
   color: white;
   padding: 12px;
@@ -49,7 +52,7 @@ header {
   justify-content: center;
   z-index: 100;
 }
-.btn-carrito:hover { background-color: #c0392b; }
+.btn-carrito:hover { background-color: #000000; }
 #badgeCarrito {
   position: absolute;
   top: -5px;
@@ -74,7 +77,7 @@ header {
   padding: 20px;
 }
 .producto {
-  background: white;
+  background: rgb(223, 208, 208);
   border-radius: 8px;
   padding: 10px;
   text-align: center;

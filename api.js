@@ -41,6 +41,7 @@ function mostrarProductos(productos){
             <h3>${p.nombre} (${p.tipo})</h3>
             <img src="${p.imagen}" alt="${p.nombre}">
             <p>Precio: €${p.precio.toFixed(2)}</p>
+            <p>talla :  ${p.talla}</p>
             <button>Agregar al carrito</button>
         `;
         div.querySelector("button").addEventListener("click", ()=> agregarAlCarrito(p.tipo, p.precio));
