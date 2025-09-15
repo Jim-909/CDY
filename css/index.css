@@ -1,0 +1,301 @@
+/* ==========================
+   VARIABLES GLOBALES
+========================== */
+:root {
+  --color-fondo: #ecf0f1;
+  --color-header: #2c3e50;
+  --color-header-text: white;
+  --color-nav-hover: #43dac5;
+  --color-nav-active: #ff6a00;
+  --color-carrito: red;
+  --color-carrito-hover: #000000;
+  --color-badge: yellow;
+  --color-producto-bg: rgb(223, 208, 208);
+  --color-producto-btn: #3498db;
+  --color-producto-btn-hover: #2980b9;
+  --color-error: red;
+  --color-footer: #2c3e50;
+  --color-footer-link-hover: #3498db;
+  --color-input-border: #ccc;
+  --color-submit: #4460AA;
+  --color-submit-hover: #2c4a8b;
+
+  --border-radius: 6px;
+  --padding-input: 8px;
+  --padding-submit: 6px 30px;
+}
+
+/* ==========================
+   GENERAL
+========================== */
+body {
+  font-family: sans-serif;
+  background-color: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header {
+  background-color: var(--color-header);
+  color: var(--color-header-text);
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo img { height: 60px; }
+
+.titulo-degradado {
+  font-family: "Arial Black", sans-serif;
+  font-size: 2rem;
+  background: linear-gradient(90deg, yellow, rgba(0, 0, 255, 0.637), red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 20px;
+}
+
+.header-buscador input {
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+}
+
+/* ==========================
+   NAV
+========================== */
+nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav a {
+  position: relative;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--color-header-text);
+  padding: 0.3rem 0;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #2841d1c5, #fa0000);
+  transition: width 0.3s ease;
+}
+
+nav a:hover { color: var(--color-nav-hover); }
+nav a:hover::after { width: 100%; }
+nav a:focus, nav a:active { color: var(--color-nav-active); }
+
+/* ==========================
+   CARRITO
+========================== */
+.btn-carrito {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  background: linear-gradient(90deg, rgb(0,0,0), var(--color-carrito));
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.btn-carrito:hover { background-color: var(--color-carrito-hover); }
+
+#badgeCarrito {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--color-badge);
+  color: black;
+  font-weight: bold;
+  font-size: 0.8rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================
+   PRODUCTOS
+========================== */
+.camisas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 50px;
+}
+
+.producto {
+  background: var(--color-producto-bg);
+  border-radius: var(--border-radius);
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.producto:hover { transform: translateY(-5px); }
+
+.producto img { width: 100%; border-radius: var(--border-radius); }
+
+.producto button {
+  margin-top: 5px;
+  background-color: var(--color-producto-btn);
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  color: white;
+  cursor: pointer;
+}
+
+.producto button:hover { background-color: var(--color-producto-btn-hover); }
+
+/* ==========================
+   MODAL
+========================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-contenido {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+  background-color: var(--color-footer);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+footer div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+footer #informacion a {
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+footer #informacion a:hover { color: var(--color-footer-link-hover); }
+
+/* ==========================
+   FORMULARIO CONTACTO
+========================== */
+.contenedor {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+.field input,
+.field textarea {
+  display: block;
+  width: 100%;
+  padding: var(--padding-input);
+  margin-top: 5px;
+  line-height: 1.5;
+  font-size: 14px;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+}
+
+.field textarea {
+  resize: none; /* textarea fijo */
+}
+
+.field input.error-border,
+.field textarea.error-border {
+  border: 2px solid var(--color-error);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+  margin-top: 3px;
+  height: 1em;
+}
+
+input[type="submit"] {
+  display: block;
+  padding: var(--padding-submit);
+  font-size: 14px;
+  background-color: var(--color-submit);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--color-submit-hover);
+}
