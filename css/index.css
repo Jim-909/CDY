@@ -16,9 +16,6 @@
   --color-error: red;
   --color-footer: #2c3e50;
   --color-footer-link-hover: #3498db;
-  --color-input-border: #ccc;
-  --color-submit: #4460AA;
-  --color-submit-hover: #2c4a8b;
 
   --border-radius: 6px;
   --padding-input: 8px;
@@ -28,11 +25,19 @@
 /* ==========================
    GENERAL
 ========================== */
-body {
+html, body {
   font-family: sans-serif;
   background-color: var(--color-fondo);
   margin: 0;
   padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* ==========================
@@ -145,6 +150,7 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 /* ==========================
    PRODUCTOS
 ========================== */
+/* Estilo original base */
 .camisas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -153,28 +159,86 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 }
 
 .producto {
-  background: var(--color-producto-bg);
+  background: white; /* minimalista sobre fondo var(--color-fondo) */
   border-radius: var(--border-radius);
   padding: 10px;
-  text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.producto:hover { transform: translateY(-5px); }
+.producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
-.producto img { width: 100%; border-radius: var(--border-radius); }
+.producto-img img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
 
-.producto button {
-  margin-top: 5px;
+.producto-info {
+  padding: 10px;
+}
+
+.marca {
+  font-size: 0.85rem;
+  color: gray;
+  margin: 5px 0 0 0;
+  text-transform: uppercase;
+}
+
+.nombre {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.precio {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.colores {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.color {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+}
+
+.stock-bajo {
+  color: red;
+  font-size: 0.8rem;
+  margin: 5px 0;
+}
+
+.btn-agregar {
+  margin-top: 8px;
+  padding: 6px 12px;
   background-color: var(--color-producto-btn);
   border: none;
-  padding: 5px 10px;
   border-radius: var(--border-radius);
   color: white;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
-.producto button:hover { background-color: var(--color-producto-btn-hover); }
+.btn-agregar:hover {
+  background-color: var(--color-producto-btn-hover);
+}
 
 /* ==========================
    MODAL
@@ -217,6 +281,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: auto;
 }
 
 footer div {
@@ -270,7 +335,7 @@ footer #informacion a:hover { color: var(--color-footer-link-hover); }
 }
 
 .field textarea {
-  resize: none; /* textarea fijo */
+  resize: none;
 }
 
 .field input.error-border,
@@ -298,4 +363,76 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: var(--color-submit-hover);
+}
+
+/* ==========================
+   MEDIA QUERIES
+========================== */
+
+/* BASE MÓVIL */
+.header-top { 
+  align-items: flex-start;
+  gap: 10px;
+}
+
+#inpBuscador {}
+
+.titulo-degradado { display: none; }
+
+.menu-toggle {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+nav {
+  display: none;
+  flex-direction: column;
+  background: var(--color-header);
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 200px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+nav a {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+nav.active { display: flex; }
+
+.camisas { grid-template-columns: 1fr; padding: 15px; }
+
+footer div { flex-direction: column; gap: 5px; text-align: center; }
+
+/* TABLET */
+@media (min-width: 768px) {
+  .header-top { flex-direction: row; align-items: center; justify-content: space-between; }
+  .logo img { display: none; }
+  .titulo-degradado { display: block; font-size: 2rem; }
+  .menu-toggle { display: none; }
+  nav { display: flex; flex-direction: row; position: static; width: auto; background: none; padding: 0; }
+  nav a { border: none; padding: 0.3rem 0.8rem; }
+  .camisas { grid-template-columns: repeat(2,1fr); padding: 20px; }
+  footer div { flex-direction: row; justify-content: space-between; text-align: left; }
+}
+
+/* ESCRITORIO */
+@media (min-width: 1024px) {
+  .titulo-degradado { font-size: 2.5rem; }
+  nav a { font-size: 1.1rem; }
+  .camisas { grid-template-columns: repeat(3,1fr); padding: 30px 50px; }
+}
+
+/* PANTALLAS GRANDES */
+@media (min-width: 1440px) {
+  .titulo-degradado { font-size: 3rem; }
+  nav a { font-size: 1.2rem; }
+  .camisas { grid-template-columns: repeat(5,1fr); padding: 40px 80px; }
 }

@@ -7,7 +7,7 @@
           "nombre": "Camisa Colombia", 
           "precio": 102.75, 
           "talla": "l", 
-          "colores": ["amarillo"], 
+          "colores": ["yellow"], 
           "stock": "6", 
           "marca": "Adidas", 
           "imagen": "img/colombia_local.png"}
@@ -18,7 +18,7 @@
           "nombre": "Camisa Colombia", 
           "precio": 65.00, 
           "talla": "s", 
-          "colores": ["amarillo", "rojo", "blanco"], 
+          "colores": ["yellow", "red", "white"], 
           "stock": "3",
           "marca": "Adidas", 
           "imagen": "img/colombia_visitante.png"}
@@ -31,7 +31,7 @@
           "nombre": "Camisa España", 
           "precio": 76.99, 
           "talla": "l", 
-          "colores": ["amarillo"], 
+          "colores": ["yellow"], 
           "stock": "6",
           "marca": "Adidas", 
           "imagen": "img/españa_local.png"}
@@ -42,7 +42,7 @@
           "nombre": "Camisa España", 
           "precio": 107.99, 
           "talla": "s", 
-          "colores": ["amarillo", "rojo", "blanco"], 
+          "colores": ["yellow", "red", "white"], 
           "stock": "3",
           "marca": "Adidas", 
           "imagen": "img/españa_visitante.png"}
@@ -55,7 +55,7 @@
           "nombre": "Camisa Venezuela",
           "precio": 46.75, 
           "talla": "l", 
-          "colores": ["amarillo"], 
+          "colores": ["yellow"], 
           "stock": "6" ,
           "marca": "Adidas", 
           "imagen": ""
@@ -67,7 +67,7 @@
           "nombre": "Camisa Venezuela", 
           "precio": 59.99, 
           "talla": "s", 
-          "colores": ["amarillo", "rojo", "blanco"], 
+          "colores": ["yellow", "red", "white"], 
           "stock": "3",
           "marca": "Adidas", 
           "imagen": ""

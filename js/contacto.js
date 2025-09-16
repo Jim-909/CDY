@@ -15,7 +15,7 @@ document.getElementById('form').addEventListener('submit', function(event){
 
   // EXPRESIONES REGULARES
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const telefonoRegex = /^(6|7|9)\d{8}$/;
+  const telefonoRegex = /^(67)\d{8}$/;
 
   // LIMPIAR ERRORES
   ['nombre','email','telefono','comentarios'].forEach(id=>{
@@ -34,7 +34,7 @@ document.getElementById('form').addEventListener('submit', function(event){
   if(!valid) return;
 
   btn.value = 'Sending...';
-  emailjs.sendForm('default_service','template_ziot0lo', this)
+  emailjs.sendForm('service_quao52m','template_ziot0lo', this)
     .then(()=>{ btn.value='Send Email'; alert('✅ Mensaje enviado con éxito'); this.reset(); })
     .catch(err=>{ btn.value='Send Email'; alert('❌ Error al enviar: '+JSON.stringify(err)); });
 });

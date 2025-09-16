@@ -22,7 +22,7 @@ window.addEventListener("click", e => { if(e.target === modalCarrito) modalCarri
 // ==========================
 // CARGAR PRODUCTOS DESDE JSON
 // ==========================
-fetch("./productos.json")
+fetch("./json/productos.json")
   .then(res => res.json())
   .then(data => {
     productosCargados = [];
@@ -42,20 +42,44 @@ fetch("./productos.json")
 // ==========================
 // FUNCION MOSTRAR PRODUCTOS
 // ==========================
-function mostrarProductos(productos){
+function mostrarProductos(productos) {
   listaProductos.innerHTML = "";
+
   productos.forEach(p => {
     const div = document.createElement("div");
     div.className = "producto";
-    const imgSrc = p.imagen ? p.imagen : "img/placeholder.png"; // placeholder si imagen vacía
+
+    // Imagen con placeholder
+    const imgSrc = p.imagen ? p.imagen : "img/placeholder.png";
+
+    // Colores disponibles como círculos pequeños
+    const coloresHTML = Array.isArray(p.colores) && p.colores.length 
+      ? `<div class="colores">${p.colores.map(c => `<span class="color" style="background-color:${c}"></span>`).join('')}</div>`
+      : "";
+
+    // Stock bajo muestra mensaje o estilo diferente
+    const stockHTML = p.stock && Number(p.stock) <= 3 
+      ? `<p class="stock-bajo">Últimas ${p.stock} unidades</p>` 
+      : "";
+
     div.innerHTML = `
-      <h3>${p.nombre} (${p.tipo})</h3>
-      <img src="${imgSrc}" alt="${p.nombre}">
-      <p>Precio: €${p.precio.toFixed(2)}</p>
-      <p>Talla: ${p.talla}</p>
-      <button>Agregar al carrito</button>
+      <div class="producto-img">
+        <img src="${imgSrc}" alt="${p.nombre}">
+      </div>
+      <div class="producto-info">
+        <h3 class="marca">${p.marca}</h3>
+        <h2 class="nombre">${p.nombre}</h2>
+        <p class="precio">€${p.precio.toFixed(2)}</p>
+        ${coloresHTML}
+        ${stockHTML}
+        <button class="btn-agregar">Agregar al carrito</button>
+      </div>
     `;
-    div.querySelector("button").addEventListener("click", ()=> agregarAlCarrito(p.tipo, p.precio));
+      
+
+    // Evento para agregar al carrito
+    div.querySelector("button").addEventListener("click", () => agregarAlCarrito(p.tipo, p.precio));
+
     listaProductos.appendChild(div);
   });
 }

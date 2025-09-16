@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day-s-hop/contacto</title>
+<link rel="icon" type="image/png" href="/ico/favicon.ico"><!-- favicon -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><!-- iconos -->
+<link rel="stylesheet"  href="../css/index.css"><!-- stilo -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><!-- emailjs -->
+</head>
+<body>
+
+  <header>
+    <div class="header-top">
+      <div class="logo">
+        <img src="/ico/logo.png" alt="logo Day-s-hop">
+      </div>
+      <h1 class="titulo-degradado">Day-s-hop</h1>
+      <div>
+        <button class="menu-toggle" aria-label="Abrir menú">
+          <span class="material-icons">menu</span>
+        </button>
+        <nav>
+          <a href="/index.html" target="_parent">tienda</a>
+          <a href="/html/futbol.html" target="_parent">partidos</a>
+          <a href="/html/contacto.html" target="_parent">contacto</a>
+        </nav>
+      </div>  
+      
+    </div>
+  </header>
+<main>
+  <div class="contenedor">
+    <h2>Formulario de Contacto</h2>
+    <form id="form">
+      <div class="field">
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre">
+        <div class="error" id="error-nombre"></div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <div class="error" id="error-email"></div>
+      </div>
+      <div class="field">
+        <label for="telefono">Teléfono</label>
+        <input type="text" name="telefono" id="telefono">
+        <div class="error" id="error-telefono"></div>
+      </div>
+      <div class="field">
+        <label for="comentarios">Comentarios</label>
+        <textarea name="comentarios" id="comentarios" rows="4" maxlength="500"></textarea>
+        <div class="error" id="error-comentarios"></div>
+      </div>
+      <input type="submit" id="button" value="Send Email">
+    </form>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <p>© 2025: Jimmy</p>
+    <div id="informacion">
+      <a href="#">Políticas de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Políticas de cookies</a>
+      <a href="#">Aviso legal</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/contacto.js"></script>
+<script src="/js/menu.js" defer></script>
+
+</body>
+</html>
