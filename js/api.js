@@ -69,6 +69,7 @@ function mostrarProductos(productos) {
       <div class="producto-info">
         <h3 class="marca">${p.marca}</h3>
         <h2 class="nombre">${p.nombre}</h2>
+        <p class="talla" >${p.talla ? `Talla: ${p.talla}` : ""}</p>
         <p class="precio">€${p.precio.toFixed(2)}</p>
         ${coloresHTML}
         ${stockHTML}
@@ -139,7 +140,8 @@ inputBuscar.addEventListener("input", ()=>{
   const filtrados = productosCargados.filter(p =>
     p.nombre.toLowerCase().includes(term) ||
     p.tipo.toLowerCase().includes(term) ||
-    p.equipo.toLowerCase().includes(term)
+    p.equipo.toLowerCase().includes(term) ||
+    (p.talla && p.talla.toLowerCase().includes(term))
   );
   mostrarProductos(filtrados.length ? filtrados : []);
 });

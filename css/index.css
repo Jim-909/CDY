@@ -3,7 +3,7 @@
 ========================== */
 :root {
   --color-fondo: #ecf0f1;
-  --color-header: #2c3e50;
+  --color-body: #2c3e50;
   --color-header-text: white;
   --color-nav-hover: #43dac5;
   --color-nav-active: #ff6a00;
@@ -14,7 +14,6 @@
   --color-producto-btn: #3498db;
   --color-producto-btn-hover: #2980b9;
   --color-error: red;
-  --color-footer: #2c3e50;
   --color-footer-link-hover: #3498db;
 
   --border-radius: 6px;
@@ -44,7 +43,7 @@ main {
    HEADER
 ========================== */
 header {
-  background-color: var(--color-header);
+  background-color: var(--color-body);
   color: var(--color-header-text);
   padding: 10px 20px;
   position: sticky;
@@ -159,12 +158,14 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 }
 
 .producto {
+  display: flex;
+  flex-direction: column;
+  /* Elimino height: 100% para que la tarjeta se adapte al contenido */
+  justify-content: flex-start;
   background: white; /* minimalista sobre fondo var(--color-fondo) */
   border-radius: var(--border-radius);
   padding: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -181,6 +182,9 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 }
 
 .producto-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
   padding: 10px;
 }
 
@@ -204,7 +208,7 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 
 .colores {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   gap: 5px;
   margin: 5px 0;
 }
@@ -219,13 +223,13 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 }
 
 .stock-bajo {
-  color: red;
-  font-size: 0.8rem;
+  color: rgb(238, 42, 42);
+  font-size: 1.5rem;
   margin: 5px 0;
 }
 
 .btn-agregar {
-  margin-top: 8px;
+  margin-top: auto;
   padding: 6px 12px;
   background-color: var(--color-producto-btn);
   border: none;
@@ -275,7 +279,7 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
    FOOTER
 ========================== */
 footer {
-  background-color: var(--color-footer);
+  background-color: var(--color-body);
   color: white;
   padding: 15px 20px;
   display: flex;
@@ -332,6 +336,7 @@ footer #informacion a:hover { color: var(--color-footer-link-hover); }
   border: 1px solid var(--color-input-border);
   border-radius: var(--border-radius);
   box-sizing: border-box;
+  border: #000000 2px solid;
 }
 
 .field textarea {
@@ -355,7 +360,7 @@ input[type="submit"] {
   padding: var(--padding-submit);
   font-size: 14px;
   background-color: var(--color-submit);
-  color: #fff;
+  color: var(--color-body);
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -405,7 +410,10 @@ nav a {
   border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
-nav.active { display: flex; }
+nav.active { 
+  display: flex; 
+  background-color: var(--color-body);
+}
 
 .camisas { grid-template-columns: 1fr; padding: 15px; }
 
