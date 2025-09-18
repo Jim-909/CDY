@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">tarea<input id="newWork" type="text"></laber>
+    <button id="addWorkBtn">añadir</button>
+    <ul id="workList"></ul>
+
+    <script>
+        // Mostrar tareas guardadas al cargar la página
+        const worklist = document.getElementById('workList');
+        let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+
+        tareas.forEach(work => {
+            const li = document.createElement('li');
+            if(typeof work === 'object') {
+                li.textContent = work.texto + ' (' + work.hora + ')';
+            } else {
+                li.textContent = work;
+            }
+            worklist.appendChild(li);
+        });
+
+        document.getElementById('addWorkBtn').addEventListener('click', function(event) {
+            const work = document.getElementById('newWork').value;
+            if(work.trim() === "") return;
+            const hora = new Date().toLocaleTimeString();
+            const tareaObj = { texto: work, hora: hora };
+            tareas.push(tareaObj);
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+            const li = document.createElement('li');
+            li.textContent = tareaObj.texto + ' (' + tareaObj.hora + ')';
+            worklist.appendChild(li);
+            document.getElementById('newWork').value = "";
+        });
+
+        document.getElementById('newWork').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('addWorkBtn').click();
+            }
+        });
+    </script>
+    
+</body>
+</html>

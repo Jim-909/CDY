@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Ejemplo de uso de JSON.stringify y JSON.parse en JavaScript</h2>
+    <script>
+    // Crear un objeto
+    const persona = { nombre: "Ana", edad: 25 };
+    // Convertir el objeto a texto JSON
+    const textoJSON = JSON.stringify(persona);
+    document.write('<p><b>JSON.stringify:</b> ' + textoJSON + '</p>');
+
+    // Guardar en localStorage
+    localStorage.setItem('persona', textoJSON);
+
+    // Leer el texto JSON de localStorage y convertirlo a objeto
+    const personaGuardada = JSON.parse(localStorage.getItem('persona'));
+    document.write('<p><b>JSON.parse:</b> ' + personaGuardada.nombre + ', ' + personaGuardada.edad + '</p>');
+
+    // Ejemplo con array
+    const tareas = ["Estudiar", "Comprar", "Dormir"];
+    const tareasJSON = JSON.stringify(tareas);
+    document.write('<p><b>Array con JSON.stringify:</b> ' + tareasJSON + '</p>');
+    localStorage.setItem('tareas', tareasJSON);
+    const tareasGuardadas = JSON.parse(localStorage.getItem('tareas'));
+    document.write('<p><b>Array con JSON.parse:</b> ' + tareasGuardadas.join(', ') + '</p>');
+    </script>
+</body>
+</html>

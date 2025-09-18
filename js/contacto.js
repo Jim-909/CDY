@@ -1,6 +1,23 @@
-// ==========================
-// INICIALIZAR EMAILJS
-// ==========================
+/* octener los datos del input del carrito de compra  */
+function obtenerDatosCarrito() {
+  // Recupera el carrito desde localStorage si no existe el div en la página
+  const listaCarrito = document.getElementById("lista-carrito");
+  if(listaCarrito) {
+    const productos = [];
+    Array.from(listaCarrito.children).forEach(div => {
+      const nombre = div.querySelector("span").textContent;
+      const cantidad = div.querySelector("input").value;
+      productos.push({ nombre, cantidad });
+    });
+    // Guarda el carrito en localStorage para otras páginas
+    localStorage.setItem('carrito', JSON.stringify(productos));
+    return productos;
+  } else {
+    // Si no existe el div, recupera el carrito guardado
+    const carrito = localStorage.getItem('carrito');
+    return carrito ? JSON.parse(carrito) : [];
+  }
+}
 emailjs.init('rad_eXXQPZOhiROyL');
 const btn = document.getElementById('button');
 
@@ -34,7 +51,9 @@ document.getElementById('form').addEventListener('submit', function(event){
   valid=false; }
 
   if(!valid) return;
-
+  const carrito = obtenerDatosCarrito();
+  document.getElementById("inputCarrito").value = JSON.stringify(carrito);
+  // El formulario se enviará con el campo oculto
 
 
   btn.value = 'Sending...';

@@ -69,7 +69,7 @@ function mostrarProductos(productos) {
       <div class="producto-info">
         <h3 class="marca">${p.marca}</h3>
         <h2 class="nombre">${p.nombre}</h2>
-        <p class="talla" >${p.talla ? `Talla: ${p.talla}` : ""}</p>
+        <p class="talla">Talla: ${p.talla}</p>
         <p class="precio">€${p.precio.toFixed(2)}</p>
         ${coloresHTML}
         ${stockHTML}
@@ -79,7 +79,7 @@ function mostrarProductos(productos) {
       
 
     // Evento para agregar al carrito
-    div.querySelector("button").addEventListener("click", () => agregarAlCarrito(p.tipo, p.precio));
+    div.querySelector("button").addEventListener("click", () => agregarAlCarrito(p));
 
     listaProductos.appendChild(div);
   });
@@ -88,34 +88,77 @@ function mostrarProductos(productos) {
 // ==========================
 // FUNCION CARRITO
 // ==========================
-function agregarAlCarrito(tipo, precio){
-  const existente = Array.from(listaCarrito.children).find(p => p.dataset.tipo === tipo);
+function agregarAlCarrito(producto){
+  const clave = `${producto.tipo}-${producto.nombre}-${producto.talla}`;
+  const existente = Array.from(listaCarrito.children).find(p => p.dataset.clave === clave);
+
   if(existente){
     const input = existente.querySelector("input");
-    input.value = parseInt(input.value) + 1;
-    actualizarTotal();
+    if(parseInt(input.value) < producto.stock){
+      input.value = parseInt(input.value) + 1;
+      actualizarTotal();
+    } else {
+      // Opcional: muestra mensaje visual
+      if(!existente.querySelector(".stock-bajo")){
+        const aviso = document.createElement("p");
+        aviso.className = "stock-bajo";
+        aviso.textContent = "Stock máximo alcanzado";
+        existente.appendChild(aviso);
+      }
+    }
     return;
   }
+
   const div = document.createElement("div");
   div.className = "producto-carrito";
-  div.dataset.tipo = tipo;
+  div.dataset.clave = clave;
   div.innerHTML = `
-    <span>${tipo} - €${precio.toFixed(2)}</span>
+    <img src="${producto.imagen ? producto.imagen : 'img/placeholder.png'}" style="width:90px ; border: 2px solid  black";"  alt="${producto.nombre}" class="img-carrito">
+    <span>${producto.nombre} (${producto.talla}) - ${producto.tipo} - €${producto.precio.toFixed(2)}</span>
     <button class="btn-restar">-</button>
-    <input type="number" value="1" min="1">
+    <input type="number" value="1" min="1" max="${producto.stock}">
     <button class="btn-sumar">+</button>
     <button class="btn-eliminar">Eliminar</button>
   `;
-  // EVENTOS DE BOTONES
-  div.querySelector(".btn-sumar").addEventListener("click", ()=> { div.querySelector("input").value++; actualizarTotal(); });
-  div.querySelector(".btn-restar").addEventListener("click", ()=> { const input = div.querySelector("input"); if(input.value>1) input.value--; actualizarTotal(); });
+  div.querySelector(".btn-sumar").addEventListener("click", ()=> {
+    const input = div.querySelector("input");
+    if(parseInt(input.value) < producto.stock){
+      input.value++;
+      // Quitar mensaje si la cantidad es menor al stock
+      const aviso = div.querySelector(".stock-bajo");
+      if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
+      actualizarTotal();
+    } else {
+      if(!div.querySelector(".stock-bajo")){
+        const aviso = document.createElement("p");
+        aviso.className = "stock-bajo";
+        aviso.textContent = "Stock máximo alcanzado";
+        div.appendChild(aviso);
+      }
+    }
+  });
+  div.querySelector(".btn-restar").addEventListener("click", ()=> {
+    const input = div.querySelector("input");
+    if(input.value > 1) input.value--;
+    // Quitar mensaje si la cantidad es menor al stock
+    const aviso = div.querySelector(".stock-bajo");
+    if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
+    actualizarTotal();
+  });
   div.querySelector(".btn-eliminar").addEventListener("click", ()=> { div.remove(); actualizarTotal(); });
-  div.querySelector("input").addEventListener("input", ()=> { const input = div.querySelector("input"); if(input.value<1) input.value=1; actualizarTotal(); });
+  div.querySelector("input").addEventListener("input", ()=> {
+    const input = div.querySelector("input");
+    if(input.value < 1) input.value = 1;
+    if(parseInt(input.value) > producto.stock) input.value = producto.stock;
+    // Quitar mensaje si la cantidad es menor al stock
+    const aviso = div.querySelector(".stock-bajo");
+    if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
+    actualizarTotal();
+  });
 
   listaCarrito.appendChild(div);
   actualizarTotal();
 }
-
 // ==========================
 // ACTUALIZAR TOTAL Y BADGE
 // ==========================
@@ -136,12 +179,29 @@ function actualizarTotal(){
 // BUSCADOR
 // ==========================
 inputBuscar.addEventListener("input", ()=>{
-  const term = inputBuscar.value.toLowerCase();
-  const filtrados = productosCargados.filter(p =>
-    p.nombre.toLowerCase().includes(term) ||
-    p.tipo.toLowerCase().includes(term) ||
-    p.equipo.toLowerCase().includes(term) ||
-    (p.talla && p.talla.toLowerCase().includes(term))
-  );
+  const term = inputBuscar.value.toLowerCase().trim();
+  if (!term) {
+    mostrarProductos(productosCargados);
+    return;
+  }
+  const terms = term.split(/\s+/).filter(Boolean);
+  let filtrados = [];
+  if (terms.length === 1) {
+    // Un solo término: busca por talla exacta o en los demás campos
+    filtrados = productosCargados.filter(p =>
+      (p.talla && p.talla.toLowerCase() === terms[0])
+    );
+  } else {
+    // Varios términos: todos deben coincidir en algún campo
+    filtrados = productosCargados.filter(p =>
+      terms.every(t =>
+        (p.talla && p.talla.toLowerCase() === t) ||
+        p.nombre.toLowerCase().includes(t) ||
+        p.tipo.toLowerCase().includes(t) ||
+        p.equipo.toLowerCase().includes(t) ||
+        (p.temporada && p.temporada.toLowerCase().includes(t))
+      )
+    );
+  }
   mostrarProductos(filtrados.length ? filtrados : []);
 });
