@@ -306,6 +306,20 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
   cursor: pointer;
 }
 
+/* boton para pagar  */
+.btnPagar {
+  background-color: var(--color-body);
+  border: black solid 2px;
+
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    display: inline-block;
+  }
+}
+
 /* ==========================
    FOOTER
 ========================== */

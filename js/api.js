@@ -9,8 +9,9 @@ const spanCerrar = document.querySelector(".cerrar");
 const listaCarrito = document.getElementById("lista-carrito");
 const totalCarrito = document.getElementById("totalCarrito");
 const badgeCarrito = document.getElementById("badgeCarrito");
+const btnpagar = document.getElementById("btnPagar");
 
-let productosCargados = []; // array con todos los productos
+let productosCargados = [];
 
 // ==========================
 // MODAL CARRITO
@@ -49,15 +50,12 @@ function mostrarProductos(productos) {
     const div = document.createElement("div");
     div.className = "producto";
 
-    // Imagen con placeholder
     const imgSrc = p.imagen ? p.imagen : "img/placeholder.png";
 
-    // Colores disponibles como círculos pequeños
     const coloresHTML = Array.isArray(p.colores) && p.colores.length 
       ? `<div class="colores">${p.colores.map(c => `<span class="color" style="background-color:${c}"></span>`).join('')}</div>`
       : "";
 
-    // Stock bajo muestra mensaje o estilo diferente
     const stockHTML = p.stock && Number(p.stock) <= 3 
       ? `<p class="stock-bajo">Últimas ${p.stock} unidades</p>` 
       : "";
@@ -76,9 +74,7 @@ function mostrarProductos(productos) {
         <button class="btn-agregar">Agregar al carrito</button>
       </div>
     `;
-      
 
-    // Evento para agregar al carrito
     div.querySelector("button").addEventListener("click", () => agregarAlCarrito(p));
 
     listaProductos.appendChild(div);
@@ -97,8 +93,8 @@ function agregarAlCarrito(producto){
     if(parseInt(input.value) < producto.stock){
       input.value = parseInt(input.value) + 1;
       actualizarTotal();
+      guardarCarrito();
     } else {
-      // Opcional: muestra mensaje visual
       if(!existente.querySelector(".stock-bajo")){
         const aviso = document.createElement("p");
         aviso.className = "stock-bajo";
@@ -113,52 +109,93 @@ function agregarAlCarrito(producto){
   div.className = "producto-carrito";
   div.dataset.clave = clave;
   div.innerHTML = `
-    <img src="${producto.imagen ? producto.imagen : 'img/placeholder.png'}" style="width:90px ; border: 2px solid  black";"  alt="${producto.nombre}" class="img-carrito">
+    <img src="${producto.imagen ? producto.imagen : 'img/placeholder.png'}" style="width:90px ; border: 2px solid black;" alt="${producto.nombre}" class="img-carrito">
     <span>${producto.nombre} (${producto.talla}) - ${producto.tipo} - €${producto.precio.toFixed(2)}</span>
     <button class="btn-restar">-</button>
     <input type="number" value="1" min="1" max="${producto.stock}">
     <button class="btn-sumar">+</button>
     <button class="btn-eliminar">Eliminar</button>
+
+    
   `;
+
+  // Eventos botones
   div.querySelector(".btn-sumar").addEventListener("click", ()=> {
     const input = div.querySelector("input");
-    if(parseInt(input.value) < producto.stock){
-      input.value++;
-      // Quitar mensaje si la cantidad es menor al stock
-      const aviso = div.querySelector(".stock-bajo");
-      if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
-      actualizarTotal();
-    } else {
-      if(!div.querySelector(".stock-bajo")){
-        const aviso = document.createElement("p");
-        aviso.className = "stock-bajo";
-        aviso.textContent = "Stock máximo alcanzado";
-        div.appendChild(aviso);
-      }
-    }
+    if(parseInt(input.value) < producto.stock) input.value++;
+    actualizarTotal();
+    guardarCarrito();
   });
   div.querySelector(".btn-restar").addEventListener("click", ()=> {
     const input = div.querySelector("input");
-    if(input.value > 1) input.value--;
-    // Quitar mensaje si la cantidad es menor al stock
-    const aviso = div.querySelector(".stock-bajo");
-    if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
+    if(parseInt(input.value) > 1) input.value--;
     actualizarTotal();
+    guardarCarrito();
   });
-  div.querySelector(".btn-eliminar").addEventListener("click", ()=> { div.remove(); actualizarTotal(); });
+  div.querySelector(".btn-eliminar").addEventListener("click", ()=> { div.remove(); actualizarTotal(); guardarCarrito(); });
   div.querySelector("input").addEventListener("input", ()=> {
     const input = div.querySelector("input");
     if(input.value < 1) input.value = 1;
     if(parseInt(input.value) > producto.stock) input.value = producto.stock;
-    // Quitar mensaje si la cantidad es menor al stock
-    const aviso = div.querySelector(".stock-bajo");
-    if(aviso && parseInt(input.value) < producto.stock) aviso.remove();
     actualizarTotal();
+    guardarCarrito();
   });
 
   listaCarrito.appendChild(div);
   actualizarTotal();
+  guardarCarrito();
 }
+
+// ==========================
+// FUNCIONES AUXILIARES
+// ==========================
+function obtenerDatosCarrito() {
+  return Array.from(listaCarrito.children).map(div => {
+    const span = div.querySelector("span").textContent;
+    const cantidad = parseInt(div.querySelector("input").value);
+    return {
+      clave: div.dataset.clave,
+      descripcion: span,
+      cantidad
+    };
+  });
+}
+
+function guardarCarrito() {
+  localStorage.setItem('carrito', JSON.stringify(obtenerDatosCarrito()));
+}
+
+function vaciarCarrito() {
+  listaCarrito.innerHTML = "";
+  actualizarTotal();
+  guardarCarrito();
+}
+
+// ==========================
+// IMPRIMIR DATOS IMPORTANTES
+// ==========================
+function imprimirCarrito() {
+  const carrito = obtenerDatosCarrito();
+  let totalGeneral = 0;
+
+  carrito.forEach(item => {
+    const partes = item.descripcion.split(" - ");
+    const nombre = partes[0];        
+    const precio = parseFloat(partes[2].replace("€",""));
+    const subtotal = precio * item.cantidad;
+
+    console.log(`Producto: ${nombre}`);
+    console.log(`Cantidad: ${item.cantidad}`);
+    console.log(`Precio unitario: €${precio.toFixed(2)}`);
+    console.log(`Subtotal: €${subtotal.toFixed(2)}`);
+    console.log("----------------------");
+
+    totalGeneral += subtotal;
+  });
+
+  console.log(`TOTAL GENERAL: €${totalGeneral.toFixed(2)}`);
+}
+
 // ==========================
 // ACTUALIZAR TOTAL Y BADGE
 // ==========================
@@ -173,6 +210,8 @@ function actualizarTotal(){
   });
   totalCarrito.textContent = `€${total.toFixed(2)}`;
   badgeCarrito.textContent = cantidadTotal;
+  btnpagar.style.display = "block";
+  
 }
 
 // ==========================
@@ -185,23 +224,14 @@ inputBuscar.addEventListener("input", ()=>{
     return;
   }
   const terms = term.split(/\s+/).filter(Boolean);
-  let filtrados = [];
-  if (terms.length === 1) {
-    // Un solo término: busca por talla exacta o en los demás campos
-    filtrados = productosCargados.filter(p =>
-      (p.talla && p.talla.toLowerCase() === terms[0])
-    );
-  } else {
-    // Varios términos: todos deben coincidir en algún campo
-    filtrados = productosCargados.filter(p =>
-      terms.every(t =>
-        (p.talla && p.talla.toLowerCase() === t) ||
-        p.nombre.toLowerCase().includes(t) ||
-        p.tipo.toLowerCase().includes(t) ||
-        p.equipo.toLowerCase().includes(t) ||
-        (p.temporada && p.temporada.toLowerCase().includes(t))
-      )
-    );
-  }
+  const filtrados = productosCargados.filter(p =>
+    terms.every(t =>
+      (p.talla && p.talla.toLowerCase() === t) ||
+      p.nombre.toLowerCase().includes(t) ||
+      p.tipo.toLowerCase().includes(t) ||
+      p.equipo.toLowerCase().includes(t) ||
+      (p.temporada && p.temporada.toLowerCase().includes(t))
+    )
+  );
   mostrarProductos(filtrados.length ? filtrados : []);
 });
