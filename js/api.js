@@ -9,7 +9,13 @@ const spanCerrar = document.querySelector(".cerrar");
 const listaCarrito = document.getElementById("lista-carrito");
 const totalCarrito = document.getElementById("totalCarrito");
 const badgeCarrito = document.getElementById("badgeCarrito");
-const btnpagar = document.getElementById("btnPagar");
+const btnpagar = document.querySelector(".btnPagar");
+const btnVaciarCarrito = document.getElementById("btnVaciarCarrito");
+
+/* modal carrito  const*/
+const modalProducto = document.getElementById("modalProducto");
+const detalleProducto = document.getElementById("detalleProducto");
+const cerrarModalProducto = document.getElementById("cerrarModalProducto");
 
 let productosCargados = [];
 
@@ -37,6 +43,7 @@ fetch("./json/productos.json")
       }
     }
     mostrarProductos(productosCargados);
+    cargarCarritoDesdeLocalStorage(); // cargamos carrito guardado
   })
   .catch(err => console.error("Error al cargar productos:", err));
 
@@ -53,8 +60,7 @@ function mostrarProductos(productos) {
     const imgSrc = p.imagen ? p.imagen : "img/placeholder.png";
 
     const coloresHTML = Array.isArray(p.colores) && p.colores.length 
-      ? `<div class="colores">${p.colores.map(c => `<span class="color" style="background-color:${c}"></span>`).join('')}</div>`
-      : "";
+      ? `<div class="colores">${p.colores.map(c => `<span class="color" style="background-color:${c}"></span>`).join('')}</div>` : "";
 
     const stockHTML = p.stock && Number(p.stock) <= 3 
       ? `<p class="stock-bajo">Últimas ${p.stock} unidades</p>` 
@@ -75,12 +81,54 @@ function mostrarProductos(productos) {
       </div>
     `;
 
-    div.querySelector("button").addEventListener("click", () => agregarAlCarrito(p));
+    // En móviles: clic en tarjeta abre modal
+    div.addEventListener("click", e => {
+      // Evitar que al clicar el botón se abra el modal
+      if(!e.target.classList.contains("btn-agregar")) abrirModalProducto(p);
+    });
+
+    // Botón agregar
+    div.querySelector(".btn-agregar").addEventListener("click", e => {
+      e.stopPropagation(); // no disparar el modal
+      agregarAlCarrito(p);
+    });
 
     listaProductos.appendChild(div);
   });
 }
+/*  MOSTRAR PRODCUTOS MOBILI FIRST  */
+function abrirModalProducto(p) {
+  detalleProducto.innerHTML = `
+    <div class="producto-img">
+      <img src="${p.imagen ? p.imagen : 'img/placeholder.png'}" alt="${p.nombre}">
+    </div>
+    <div class="producto-info">
+      <h3 class="marca">${p.marca}</h3>
+      <h2 class="nombre">${p.nombre}</h2>
+      <p class="talla">Talla: ${p.talla}</p>
+      <p class="precio">€${p.precio.toFixed(2)}</p>
+      <div class="colores">${p.colores.map(c => `<span class="color" style="background-color:${c}"></span>`).join('')}</div>
+      ${p.stock && Number(p.stock) <= 3 ? `<p class="stock-bajo">Últimas ${p.stock} unidades</p>` : ''}
+      <button class="btn-agregar">Agregar al carrito</button>
+    </div>
+  `;
+  
+  // Botón agregar dentro del modal
+  detalleProducto.querySelector(".btn-agregar").addEventListener("click", () => {
+    agregarAlCarrito(p);
+    modalProducto.style.display = "none";
+  });
 
+  modalProducto.style.display = "block";
+}
+
+cerrarModalProducto.addEventListener("click", () => {
+  modalProducto.style.display = "none";
+});
+
+window.addEventListener("click", e => {
+  if(e.target === modalProducto) modalProducto.style.display = "none";
+});
 // ==========================
 // FUNCION CARRITO
 // ==========================
@@ -94,13 +142,6 @@ function agregarAlCarrito(producto){
       input.value = parseInt(input.value) + 1;
       actualizarTotal();
       guardarCarrito();
-    } else {
-      if(!existente.querySelector(".stock-bajo")){
-        const aviso = document.createElement("p");
-        aviso.className = "stock-bajo";
-        aviso.textContent = "Stock máximo alcanzado";
-        existente.appendChild(aviso);
-      }
     }
     return;
   }
@@ -115,8 +156,6 @@ function agregarAlCarrito(producto){
     <input type="number" value="1" min="1" max="${producto.stock}">
     <button class="btn-sumar">+</button>
     <button class="btn-eliminar">Eliminar</button>
-
-    
   `;
 
   // Eventos botones
@@ -132,7 +171,11 @@ function agregarAlCarrito(producto){
     actualizarTotal();
     guardarCarrito();
   });
-  div.querySelector(".btn-eliminar").addEventListener("click", ()=> { div.remove(); actualizarTotal(); guardarCarrito(); });
+  div.querySelector(".btn-eliminar").addEventListener("click", ()=> {
+    div.remove();
+    actualizarTotal();
+    guardarCarrito();
+  });
   div.querySelector("input").addEventListener("input", ()=> {
     const input = div.querySelector("input");
     if(input.value < 1) input.value = 1;
@@ -172,29 +215,31 @@ function vaciarCarrito() {
 }
 
 // ==========================
-// IMPRIMIR DATOS IMPORTANTES
+// CARGAR CARRITO DESDE LOCALSTORAGE
 // ==========================
-function imprimirCarrito() {
-  const carrito = obtenerDatosCarrito();
-  let totalGeneral = 0;
-
-  carrito.forEach(item => {
-    const partes = item.descripcion.split(" - ");
-    const nombre = partes[0];        
-    const precio = parseFloat(partes[2].replace("€",""));
-    const subtotal = precio * item.cantidad;
-
-    console.log(`Producto: ${nombre}`);
-    console.log(`Cantidad: ${item.cantidad}`);
-    console.log(`Precio unitario: €${precio.toFixed(2)}`);
-    console.log(`Subtotal: €${subtotal.toFixed(2)}`);
-    console.log("----------------------");
-
-    totalGeneral += subtotal;
+function cargarCarritoDesdeLocalStorage() {
+  const carritoGuardado = JSON.parse(localStorage.getItem("carrito")) || [];
+  carritoGuardado.forEach(item => {
+    const producto = productosCargados.find(p => `${p.tipo}-${p.nombre}-${p.talla}` === item.clave);
+    if(producto){
+      for(let i = 0; i < item.cantidad; i++){
+        agregarAlCarrito(producto);
+      }
+    }
   });
-
-  console.log(`TOTAL GENERAL: €${totalGeneral.toFixed(2)}`);
 }
+
+// ==========================
+// BOTÓN VACIAR CARRITO
+// ==========================
+btnVaciarCarrito.addEventListener("click", () => {
+  if(listaCarrito.children.length === 0){
+    btnpagar.style.display = "none";
+    return;
+  }
+    vaciarCarrito();
+    btnpagar.style.display = "none";
+});
 
 // ==========================
 // ACTUALIZAR TOTAL Y BADGE
@@ -210,8 +255,8 @@ function actualizarTotal(){
   });
   totalCarrito.textContent = `€${total.toFixed(2)}`;
   badgeCarrito.textContent = cantidadTotal;
-  btnpagar.style.display = "block";
-  
+  btnpagar.style.display = cantidadTotal === 0 ? "none" : "block";
+  btnVaciarCarrito.style.display = cantidadTotal === 0 ? "none" : "block";
 }
 
 // ==========================

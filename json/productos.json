@@ -1,9 +1,85 @@
 {
+  "2024": {
+    "colombia": {
+      "local": [
+        {
+          "id": 935,
+          "nombre": "Camisa Colombia / ", 
+          "precio": 59.99, 
+          "talla": "SS", 
+          "colores": ["yellow,white"], 
+          "stock": "2", 
+          "marca": "Nike", 
+          "imagen": ""}
+      ],
+      "visitante": [
+        {
+          "id": 56, 
+          "nombre": "Camisa Colombia", 
+          "precio": 65.00, 
+          "talla": "XXL", 
+          "colores": ["yellow", "red", "white"], 
+          "stock": "6",
+          "marca": "Adidas", 
+          "imagen": ""}
+      ]
+    },
+    "españa": {
+      "local": [
+        {
+          "id": 72, 
+          "nombre": "Camisa España", 
+          "precio": 76.99, 
+          "talla": "L", 
+          "colores": ["yellow"], 
+          "stock": "6",
+          "marca": "Reebok", 
+          "imagen": ""}
+      ],
+      "visitante": [
+        {
+          "id": 38, 
+          "nombre": "Camisa España", 
+          "precio": 45.99, 
+          "talla": "S", 
+          "colores": ["yellow", "red", "white"], 
+          "stock": "3",
+          "marca": "Adidas", 
+          "imagen": ""}
+      ]
+    },
+    "venezuela": {
+      "local": [
+        {
+          "id": 49, 
+          "nombre": "Camisa Venezuela",
+          "precio": 49.75, 
+          "talla": "XL", 
+          "colores": ["yellow"], 
+          "stock": "6" ,
+          "marca": "Adidas", 
+          "imagen": ""
+          }
+      ],
+      "visitante": [
+        {
+          "id": 68,
+          "nombre": "Camisa Venezuela", 
+          "precio": 60.99, 
+          "talla": "M", 
+          "colores": ["yellow", "red", "white"], 
+          "stock": "3",
+          "marca": "Adidas", 
+          "imagen": ""
+        }
+      ]
+    }
+  },
   "2025": {
     "colombia": {
       "local": [
         {
-          "id": 456,
+          "id": 6,
           "nombre": "Camisa Colombia", 
           "precio": 102.75, 
           "talla": "XS", 
@@ -14,7 +90,7 @@
       ],
       "visitante": [
         {
-          "id": 823, 
+          "id": 99, 
           "nombre": "Camisa Colombia", 
           "precio": 65.00, 
           "talla": "M", 

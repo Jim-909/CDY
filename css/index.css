@@ -37,6 +37,9 @@ html, body {
 
 main {
   flex: 1;
+  padding: 0 80px;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 /* ==========================
@@ -49,6 +52,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .header-top {
@@ -79,9 +84,15 @@ header {
    NAV
 ========================== */
 nav {
-  display: flex;
-  gap: 2rem;
-  align-items: center;
+  display: none;
+  flex-direction: column;
+  background: var(--color-body);
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 200px;
+  padding: 10px;
+  z-index: 1000;
 }
 
 nav a {
@@ -92,6 +103,8 @@ nav a {
   color: var(--color-header-text);
   padding: 0.3rem 0;
   transition: color 0.3s ease;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 nav a::after {
@@ -108,6 +121,10 @@ nav a::after {
 nav a:hover { color: var(--color-nav-hover); }
 nav a:hover::after { width: 100%; }
 nav a:focus, nav a:active { color: var(--color-nav-active); }
+
+nav.active { 
+  display: flex; 
+}
 
 /* ==========================
    CARRITO
@@ -152,9 +169,9 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
 /* Estilo original base */
 .camisas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px 50px;
+  grid-template-columns: repeat( 3, 1fr);
+  gap: 15px;
+  padding: 10px 15px;
 }
 
 .producto {
@@ -168,6 +185,8 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
   transition: transform 0.2s, box-shadow 0.2s;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 330px;
+  height: 98%;
 }
 
 .producto:hover {
@@ -319,6 +338,30 @@ nav a:focus, nav a:active { color: var(--color-nav-active); }
     display: inline-block;
   }
 }
+/* boton para borrar carrito */
+#btnVaciarCarrito {
+  background-color: #e74c3c; /* rojo para indicar acción de borrar */
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.2s, transform 0.2s;
+  display: inline-block;
+}
+
+#btnVaciarCarrito:hover {
+  background-color: #c0392b; /* rojo más oscuro al pasar el mouse */
+  transform: translateY(-2px);
+}
+
+#btnVaciarCarrito:active {
+  transform: translateY(0);
+}
+
 
 /* ==========================
    FOOTER

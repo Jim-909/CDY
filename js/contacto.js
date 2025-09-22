@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  emailjs.init('rad_eXXQPZOhiROyL');
+  emailjs.init(publicKey);
   const btn = document.getElementById('button');
 
   const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Enviar con emailjs
     btn.value = 'Sending...';
-    emailjs.sendForm('service_quao52m','template_ziot0lo', this)
+    emailjs.sendForm(servicioID,templateID, this)
       .then(()=>{
         btn.value='Send Email';
         alert('✅ Mensaje enviado con éxito');
