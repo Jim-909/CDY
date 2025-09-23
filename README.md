@@ -32,3 +32,29 @@ Day-s-hop es una **tienda online de camisetas de fútbol** que permite:
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/tu-usuario/day-s-hop.git
+2. Abrir index.html en tu navegador.
+
+3. Navegar por la tienda, agregar productos al carrito y probar el formulario de contacto.
+
+
+## Estrutura del proyecto
+/Day-s-hop
+│
+├─ /css
+│  └─ index.css
+├─ /js
+│  ├─ api.js
+│  ├─ carrito.js
+│  ├─ contacto.js
+│  └─ menu.js
+├─ /html
+│  ├─ contacto.html
+│  └─ futbol.html
+├─ /json
+│  └─ productos.json
+├─ index.html
+└─ README.md
+## Vista previa 
+
+## Autor 
+Jimmy - 2025
