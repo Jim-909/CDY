@@ -16,6 +16,7 @@ const btnVaciarCarrito = document.getElementById("btnVaciarCarrito");
 const modalProducto = document.getElementById("modalProducto");
 const detalleProducto = document.getElementById("detalleProducto");
 const cerrarModalProducto = document.getElementById("cerrarModalProducto");
+const cerrarcarrito = document.getElementById("cerrarcarrito");
 
 let productosCargados = [];
 
@@ -125,6 +126,12 @@ function abrirModalProducto(p) {
 cerrarModalProducto.addEventListener("click", () => {
   modalProducto.style.display = "none";
 });
+
+cerrarcarrito.addEventListener("click", () => {
+  modalCarrito.style.display = "none";
+});
+
+
 
 window.addEventListener("click", e => {
   if(e.target === modalProducto) modalProducto.style.display = "none";

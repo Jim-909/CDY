@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Day-s-hop</title>
-  <link rel="icon" type="image/png" href="/ico/favicon.ico">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="/css/index.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day-s-hop</title>
+<link rel="icon" type="image/png" href="/ico/favicon.ico">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
 
 <header>
   <div class="header-top">
     <div class="logo">
-      <img src="/ico/logo.png" alt="logo Day-s-hop">
+      <img src="ico/logo.png" alt="logo Day-s-hop">
     </div>
     <h1 class="titulo-degradado">Day-s-hop</h1>
     <div>
@@ -21,39 +21,52 @@
         <span class="material-icons">menu</span>
       </button>
       <nav>
-        <a href="/index.html">Tienda</a>
-        <a href="/html/futbol.html">Partidos</a>
-        <a href="/html/contacto.html">Contacto</a>
+        <a href="index.html">Tienda</a>
+        <a href="html/futbol.html">Partidos</a>
+        <a href="html/contacto.html">Contacto</a>
       </nav>
+      
     </div>  
     <div class="header-buscador">
       <label>
         <span class="material-icons">search</span>
         <input type="text" id="inpBuscador" placeholder="Buscar productos..." aria-label="Buscar productos">
       </label>
-    </div>
-    <!-- Botón carrito -->
-    <button id="btnAbrirCarrito" class="btn-carrito">
-      <span class="material-icons">shopping_cart</span>
-      <span id="badgeCarrito">0</span>
-    </button>
+    </div>          
+      <!-- Botón de carrito fijo con badge -->
+      <button id="btnAbrirCarrito" class="btn-carrito">
+        <span class="material-icons">shopping_cart</span>
+        <span id="badgeCarrito">0</span>
+      </button>
+
   </div>
 </header>
 
 <main>
-  <!-- Contenido propio de cada página -->
+  <!-- MODAL PRODUCTO -->
+<div id="modalProducto" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-contenido">
+    <span class="cerrar" id="cerrarModalProducto">&times;</span>
+    <div id="detalleProducto"></div>
+  </div>
+</div>
+  <!-- Contenedor de productos -->
   <div class="camisas"></div>
 </main>
+
 
 <!-- MODAL CARRITO -->
 <div id="modalCarrito" class="modal" role="dialog" aria-modal="true">
   <div class="modal-contenido">
-    <span class="cerrar">&times;</span>
+    <span class="cerrar" id="cerrarcarrito">&times;</span>
     <h2>Carrito</h2>
     <div id="lista-carrito"></div>
     <p>Total: <span id="totalCarrito">€0.00</span></p>
-    <button id="btnVaciarCarrito" class="btnVaciar">Vaciar carrito</button>
-    <button class="btnPagar"><a href="/html/contacto.html">Pagar</a></button>
+    <div id="accionesCarrito">
+      <button id="btnVaciarCarrito" class="btnVaciar">Vaciar carrito</button>
+      <button class="btnPagar"><a href="/html/contacto.html">Pagar</a></button>
+    </div>
+    
   </div>
 </div>
 
@@ -73,8 +86,8 @@
   </div>
 </footer>
 
-<script src="/js/api.js" defer></script>
-<script src="/js/menu.js" defer></script>
-<script src="/js/carrito.js" defer></script>
+<script src="./js/api.js" defer></script>
+<script src="./js/menu.js" defer></script>
+
 </body>
 </html>
