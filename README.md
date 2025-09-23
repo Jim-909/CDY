@@ -68,7 +68,6 @@ Permite:
 ![Vista previa de la tienda](img/preview.png)  <!-- Reemplaza con tu ruta de imagen -->
 
 ---
-
 ## 🚀 Instalación y uso
 
 1. Clonar el repositorio:
@@ -81,4 +80,14 @@ git clone https://github.com/tu-usuario/day-s-hop.git
 3. Navegar por la tienda, agregar productos al carrito y probar el formulario de contacto
 
 ## Licencia
+
 público y educativo, libre para ser consultado en GitHub.
+
+## Autor
+
+Jimmy - 2025 
+
+
+
+
+
