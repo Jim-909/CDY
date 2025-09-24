@@ -65,7 +65,8 @@ Permite:
 
 ## 🖼 Vista previa
 
-![Vista previa de la tienda](MFO952/Imagen paguina dayshop.kesug.com 01.png)  <!-- Reemplaza con tu ruta de imagen -->
+![Vista previa de la tienda](MFO952/Imagen%20paguina%20dayshop.kesug.com%2001.png)
+ <!-- Reemplaza con tu ruta de imagen -->
 
 ---
 ## 🚀 Instalación y uso
