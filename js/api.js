@@ -5,14 +5,13 @@ const listaProductos = document.querySelector(".camisas");
 const inputBuscar = document.getElementById("inpBuscador");
 const modalCarrito = document.getElementById("modalCarrito");
 const btnAbrirCarrito = document.getElementById("btnAbrirCarrito");
-const spanCerrar = document.querySelector(".cerrar");
 const listaCarrito = document.getElementById("lista-carrito");
 const totalCarrito = document.getElementById("totalCarrito");
 const badgeCarrito = document.getElementById("badgeCarrito");
 const btnpagar = document.querySelector(".btnPagar");
 const btnVaciarCarrito = document.getElementById("btnVaciarCarrito");
 
-/* modal carrito  const*/
+// modal producto
 const modalProducto = document.getElementById("modalProducto");
 const detalleProducto = document.getElementById("detalleProducto");
 const cerrarModalProducto = document.getElementById("cerrarModalProducto");
@@ -23,10 +22,25 @@ let productosCargados = [];
 // ==========================
 // MODAL CARRITO
 // ==========================
-btnAbrirCarrito.addEventListener("click", () => modalCarrito.style.display = "block");
-spanCerrar.addEventListener("click", () => modalCarrito.style.display = "none");
-window.addEventListener("click", e => { if(e.target === modalCarrito) modalCarrito.style.display = "none"; });
+if (btnAbrirCarrito && modalCarrito) {
+  btnAbrirCarrito.addEventListener("click", () => modalCarrito.style.display = "block");
+}
 
+// listener para cerrar el modal del carrito (solo si existe el botón correcto)
+if (cerrarcarrito && modalCarrito) {
+  cerrarcarrito.addEventListener("click", () => modalCarrito.style.display = "none");
+}
+
+// listener para cerrar modal producto
+if (cerrarModalProducto && modalProducto) {
+  cerrarModalProducto.addEventListener("click", () => modalProducto.style.display = "none");
+}
+
+// cerrar modal cuando se haga click fuera (uno para cada modal)
+window.addEventListener("click", e => {
+  if (modalCarrito && e.target === modalCarrito) modalCarrito.style.display = "none";
+  if (modalProducto && e.target === modalProducto) modalProducto.style.display = "none";
+});
 // ==========================
 // CARGAR PRODUCTOS DESDE JSON
 // ==========================
