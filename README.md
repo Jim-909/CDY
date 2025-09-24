@@ -65,7 +65,7 @@ Permite:
 
 ## 🖼 Vista previa
 
-![Vista previa de la tienda](img/preview.png)  <!-- Reemplaza con tu ruta de imagen -->
+![Vista previa de la tienda](MFO952/Imagen paguina dayshop.kesug.com 01.png)  <!-- Reemplaza con tu ruta de imagen -->
 
 ---
 ## 🚀 Instalación y uso
@@ -74,7 +74,7 @@ Permite:
 
 ```bash
 git clone https://github.com/tu-usuario/day-s-hop.git
-
+```
 2. Abrir index.html en tu navegador.
 
 3. Navegar por la tienda, agregar productos al carrito y probar el formulario de contacto
