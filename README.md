@@ -56,10 +56,6 @@ Permite:
   - Comentarios  
 - Guardado de carrito y formulario en **LocalStorage**
 
----
-
-## 📂 Estructura del proyecto
-
 
 ---
 
