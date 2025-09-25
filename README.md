@@ -61,33 +61,35 @@ Permite:
 
 ```bash
 CDY/
-├── css/                         # Estilos CSS del sitio
-│   ├── index.css
-│   ├── nav.css
-│   └── style.css
+├── css/                         # Hojas de estilo CSS
+│   └── index.css
 ├── html/                        # Páginas HTML adicionales
 │   ├── contacto.html
-│   └── productos.html
+│   └── futbol.html
 ├── ico/                         # Íconos del sitio
-│   └── favicon.ico
-├── img/                         # Imágenes usadas en la tienda
-│   ├── banner.jpg
-│   ├── carrito.png
+│   ├── favicon.ico
 │   ├── logo.png
-│   └── producto1.jpg
-├── js/                          # Funcionalidad dinámica en JavaScript
-│   ├── app.js
+│   ├── logoconfondoblanco - copia.png
+│   └── logoconfondoblanco.png
+├── img/                         # Imágenes utilizadas en la web
+│   ├── colombia_local.png
+│   ├── colombia_visitante.png
+│   ├── españa_local.png
+│   ├── españa_visitante.png
+│   ├── Imagen paguina dayshop.png
+│   └── placeholder.png
+├── js/                          # Funcionalidad en JavaScript
+│   ├── api.js
 │   ├── carrito.js
-│   └── validaciones.js
-├── json/                        # Datos en formato JSON
+│   ├── contacto.js
+│   └── menu.js
+├── json/                        # Archivos JSON de datos
 │   └── productos.json
-├── practica/                    # Carpeta de ejercicios/prácticas
-│   ├── ejercicio1.html
-│   ├── ejercicio2.html
-│   └── ejercicio3.html
+├── practica/                    # Carpeta de prácticas
+│   └── (archivos de ejercicios)
 ├── seguridad/                   # Recursos relacionados con seguridad
-│   ├── csrf.js                  # Protección contra ataques CSRF
-│   └── seguridad.html           # Explicación de medidas de seguridad
+│   └── config.js
+├── .gitignore                   # Archivos ignorados por git
 ├── index.html                   # Página principal del proyecto
 └── README.md                    # Documentación del proyecto
 
