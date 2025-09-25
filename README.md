@@ -56,12 +56,94 @@ Permite:
   - Comentarios  
 - Guardado de carrito y formulario en **LocalStorage**
 
-
 ---
+## 📂 Estructura del proyecto
+
+```bash
+CDY/
+├── css/                         # Estilos CSS del sitio
+│   ├── index.css
+│   ├── nav.css
+│   └── style.css
+├── html/                        # Páginas HTML adicionales
+│   ├── contacto.html
+│   └── productos.html
+├── ico/                         # Íconos del sitio
+│   └── favicon.ico
+├── img/                         # Imágenes usadas en la tienda
+│   ├── banner.jpg
+│   ├── carrito.png
+│   ├── logo.png
+│   └── producto1.jpg
+├── js/                          # Funcionalidad dinámica en JavaScript
+│   ├── app.js
+│   ├── carrito.js
+│   └── validaciones.js
+├── json/                        # Datos en formato JSON
+│   └── productos.json
+├── practica/                    # Carpeta de ejercicios/prácticas
+│   ├── ejercicio1.html
+│   ├── ejercicio2.html
+│   └── ejercicio3.html
+├── seguridad/                   # Recursos relacionados con seguridad
+│   ├── csrf.js                  # Protección contra ataques CSRF
+│   └── seguridad.html           # Explicación de medidas de seguridad
+├── index.html                   # Página principal del proyecto
+└── README.md                    # Documentación del proyecto
+
+```
+
+## 📖 Explicación de carpetas y archivos
+
+- **css/**  
+  Contiene las hojas de estilo en cascada (CSS) que definen el diseño y la apariencia visual del sitio web.  
+  - `index.css`: estilos principales aplicados a la página de inicio y otras secciones.
+
+- **html/**  
+  Incluye páginas HTML adicionales al `index.html`.  
+  - `contacto.html`: página de contacto.  
+  - `futbol.html`: página dedicada a contenidos relacionados con fútbol.
+
+- **ico/**  
+  Carpeta con íconos e imágenes pequeñas utilizadas para identidad visual del sitio.  
+  - `favicon.ico`: ícono mostrado en la pestaña del navegador.  
+  - `logo.png` y variaciones: logotipos en diferentes formatos.
+
+- **img/**  
+  Contiene imágenes del proyecto, principalmente gráficos y recursos visuales de productos o temáticas deportivas.  
+  - Ejemplos: `colombia_local.png`, `españa_visitante.png`, `placeholder.png`.
+
+- **js/**  
+  Archivos JavaScript que añaden interacción y funcionalidad dinámica al sitio.  
+  - `api.js`: probablemente maneja llamadas a APIs externas o internas.  
+  - `carrito.js`: lógica para la gestión del carrito de compras.  
+  - `contacto.js`: validación o envío del formulario de contacto.  
+  - `menu.js`: funcionalidad del menú de navegación.
+
+- **json/**  
+  Archivos con datos estructurados en formato JSON.  
+  - `productos.json`: listado de productos usado en la tienda o catálogo.
+
+- **practica/**  
+  Carpeta destinada a ejercicios o pruebas de desarrollo. *(No se incluye resumen detallado por tu petición).*
+
+- **seguridad/**  
+  Recursos vinculados a aspectos de seguridad del proyecto.  
+  - `config.js`: archivo de configuración (posiblemente variables o parámetros de seguridad).
+
+- **.gitignore**  
+  Define qué archivos o carpetas deben ser ignorados por Git (para no subirse al repositorio).
+
+- **index.html**  
+  Página principal del sitio web, la que sirve como entrada al proyecto.
+
+- **README.md**  
+  Archivo de documentación principal donde se explica el proyecto, su estructura y su uso.
+
 
 ## 🖼 Vista previa
 
-![Vista previa de la tienda](MFO952/Imagen%20paguina%20dayshop.kesug.com%2001.png)
+![Vista previa de la tienda](img/Imagen%20paguina%20dayshop.kesug.com%2001.png)
  <!-- Reemplaza con tu ruta de imagen -->
 
 ---
